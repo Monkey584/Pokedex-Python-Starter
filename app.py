@@ -20,9 +20,10 @@ pokedex = open("./pokedex.json", encoding="utf8")
 type = open("./types.json", encoding="utf8")
 data = json.load(pokedex)
 typing = json.load(type)
-for index, item in enumerate(data):
-    print(item["id"],":" ,item["name"][f"{x}"])
-y = input("Shearch a type: ")
-if y == item["type"]:
-    for index, item in enumerate(data):
-        print(item["id"],":" ,item["name"][f"{x}"], item["type"])
+for pokemon in(data):
+    print(pokemon["name"][x])
+y = input("Search a type: ")
+for pokemon in (data):
+    if y == pokemon["typing"]:
+        print(pokemon["name"][f"{x}"])
+print(y)
