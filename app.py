@@ -54,11 +54,13 @@ matching_name = next(
     (  
         pokemon
         for pokemon in data
-        if z.strip().casefold()
-        == pokemon["name"][x].casefold() 
+        for i in range(len(z.strip().casefold().split()))
+        if z.strip().casefold().split()[i]
+        == pokemon["name"][x].casefold().split()[i]
     ),
     None,
 )
+print(matching_type)
 if matching_name is None:
     print(f"No Pokémon named {z} was found")
 else:
