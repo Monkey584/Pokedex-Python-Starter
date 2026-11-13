@@ -26,7 +26,8 @@ while x not in ["english", "japanese", "chinese", "french"]:
 else:
     for pokemon in data:
         print(pokemon["name"][x])
-
+        name = pokemon["name"]
+        print(name)
 y = input("Search a type: ")
 matching_type = next(
     (
@@ -53,22 +54,23 @@ z = input("Search a name: ")
 matching_name = next(
     (
         pokemon_name
-        for pokemon_name in data
+        for pokemon_name in name
+        for i in range(len(z.strip().casefold().split()))
         if z.strip().casefold().split()
-        == pokemon_name.get(x, pokemon_name["name"]["english"]).casefold().split()
+        == pokemon_name.get(x, pokemon_name["english"]).casefold().split()[i]
     ),
     None
 )
-
 if matching_name is None:
     print(f"No Pokémon named {z} was found")
 else:
     names = [
         pokemon
         for pokemon in data
-        if matching_name["name"][x] == pokemon["name"][x]
+        if matching_name["name"]["english"] == pokemon["name"]["english"]
     ]
     if names:
         for pokemon in names:
             print(pokemon["name"][x])
 
+print(matching_type)
