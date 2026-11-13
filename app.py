@@ -50,14 +50,16 @@ else:
             print(pokemon["name"][x])
 
 z = input("Search a name: ")
-matching_name = None
-for pokemon in data:
-    for i in range(len(z.strip().casefold().split())):
-        if z.strip().casefold().split()[i] == pokemon["name"][x].casefold().split()[i]:
-            matching_name = next(pokemon["name"][x])
+matching_name = next(
+    (
+        pokemon_name
+        for pokemon_name in data
+        if z.strip().casefold().split()
+        == pokemon_name.get(x, pokemon_name["name"]["english"]).casefold().split()
+    ),
+    None
+)
 
-
-print(matching_type)
 if matching_name is None:
     print(f"No Pokémon named {z} was found")
 else:
