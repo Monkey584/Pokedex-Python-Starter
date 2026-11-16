@@ -54,9 +54,9 @@ matching_name = next(
     (
         pokemon_name
         for pokemon_name in data
-        i in range(len(letters))
-        if letters[i]
-        == list(pokemon_name["name"].get(x, pokemon_name["name"]["english"]).casefold())[i]
+            for i in range(len(letters))
+            if letters[i]
+            == list(pokemon_name["name"].get(x, pokemon_name["name"]["english"]).casefold())[i]
     ),
     None
 )
