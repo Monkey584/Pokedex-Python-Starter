@@ -17,9 +17,11 @@ print(data[0])
 #Based on user input, show all moves that a pokemon could learn based on their type. For example, if Charizard is fire/fyling, show all fire and flying moves. HINT import the moves.json file too!
 x = input("Select a language(english/japanese/chinese/french): ").casefold()
 pokedex = open("./pokedex.json", encoding="utf8")
-type = open("./types.json", encoding="utf8")
+poketype = open("./types.json", encoding="utf8")
+pokemoves = open("./moves.json", encoding="utf8")
 data = json.load(pokedex)
-typing = json.load(type)
+type = json.load(poketype)
+moves = json.load(pokemoves)
 
 while x not in ["english", "japanese", "chinese", "french"]:
     x = input("The is not a language in the data, please reselect english, japanese, chinese or french: ")
@@ -30,7 +32,7 @@ y = input("Search a type: ")
 matching_type = next(
     (
         pokemon_type
-        for pokemon_type in typing
+        for pokemon_type in type
         if y.strip().casefold()
         == pokemon_type.get(x, pokemon_type["english"]).casefold()
     ),
@@ -49,26 +51,40 @@ else:
             print(pokemon["name"][x])
 
 z = input("Search a name: ")
-letters = list(z.strip().casefold())
+names = []
+for pokemon in data:
+    if z.strip().casefold() in pokemon["name"].get(x, pokemon["name"]["english"]).casefold():
+        names.append(pokemon)
+
+if not names:
+    print(f"No Pokémon named {z} was found")
+else:
+    for pokemon in names:
+        print(pokemon["name"][x])
+
+m = input("Search for a pokemon to find possible moves: ")
+letters = list(m.strip().casefold())
 matching_name = next(
     (
         pokemon_name
         for pokemon_name in data
-            for i in range(len(letters))
-            if letters[i]
-            == list(pokemon_name["name"].get(x, pokemon_name["name"]["english"]).casefold())[i]
+        for i in range(len(letters))
+        if letters[i]
+        == list(pokemon_name["name"].get(x, pokemon_name["name"]["english"]).casefold())[i]
     ),
     None
 )
-
 if matching_name is None:
-    print(f"No Pokémon named {z} was found")
+    print(f"No Pokémon type was found for: {y}")
 else:
-    names = [
+    movess = [
         pokemon
         for pokemon in data
-        if matching_name["name"]["english"] == pokemon["name"]["english"]
+        if matching_name["name"]["english"] in pokemon["name"]["english"]
     ]
-    if names:
-        for pokemon in names:
+    if movess:
+        for pokemon in movess:
             print(pokemon["name"][x])
+for pokemon in data:
+    if moves["type"] in movess["type"]:
+        print(pokemon["name"][x])
