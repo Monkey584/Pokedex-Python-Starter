@@ -28,13 +28,14 @@ while x not in ["english", "japanese", "chinese", "french"]:
 else:
     for pokemon in data:
         print(pokemon["name"][x])
+
 y = input("Search a type: ")
 matching_type = next(
     (
         pokemon_type
         for pokemon_type in type
         if y.strip().casefold()
-        == pokemon_type.get(x, pokemon_type["english"]).casefold()
+        == pokemon_type[x].casefold or pokemon_type["english"].casefold()
     ),
     None
 )
@@ -85,6 +86,7 @@ else:
     if movess:
         for pokemon in movess:
             print(pokemon["name"][x])
-for pokemon in data:
-    if moves["type"] in movess["type"]:
-        print(pokemon["name"][x])
+for pokemon_move in moves:
+    if pokemon_move["type"] in matching_name["type"]:
+        print(pokemon_move["ename"])
+        
