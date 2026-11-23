@@ -64,14 +64,12 @@ else:
         print(pokemon["name"][x])
 
 m = input("Search for a pokemon to find possible moves: ")
-letters = list(m.strip().casefold())
 matching_name = next(
     (
         pokemon_name
         for pokemon_name in data
-        for i in range(len(letters))
-        if letters[i]
-        == list(pokemon_name["name"].get(x, pokemon_name["name"]["english"]).casefold())[i]
+        if m.strip().casefold()
+        == pokemon_name["name"].get(x, pokemon_name["name"]["english"]).casefold()
     ),
     None
 )
@@ -86,7 +84,14 @@ else:
     if movess:
         for pokemon in movess:
             print(pokemon["name"][x])
-for pokemon_move in moves:
-    if pokemon_move["type"] in matching_name["type"]:
-        print(pokemon_move["ename"])
+learn = next(
+    (
+    pokemon_move
+    for pokemon_move in moves
+    if pokemon_move["type"]
+    == matching_name["type"]
+    ),
+    None
+)
+print(learn)
         
