@@ -86,10 +86,10 @@ else:
             print(pokemon["name"][x])
 learn = next(
     (
-    pokemon_move
-    for pokemon_move in moves
-    if pokemon_move["type"]
-    in matching_name["type"]
+        pokemon_move
+        for pokemon_move in moves
+        if pokemon_move["type"]
+        in matching_name["type"]
     ),
     None
 )
@@ -98,9 +98,10 @@ if learn is None:
 else:
     move = [
         pokemon
-        for pokemon in matching_name
-        if learn["type"] in matching_name["type"]
+        for pokemon in moves
+        if pokemon["type"] in matching_name["type"]
     ]
     if move:
-        for pokemon_move in moves:
+        for pokemon_move in move:
             print(pokemon_move["ename"])
+print(matching_name["type"])
