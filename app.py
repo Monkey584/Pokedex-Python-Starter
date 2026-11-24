@@ -76,22 +76,31 @@ matching_name = next(
 if matching_name is None:
     print(f"No Pokémon type was found for: {y}")
 else:
-    movess = [
+    name = [
         pokemon
         for pokemon in data
         if matching_name["name"]["english"] in pokemon["name"]["english"]
     ]
-    if movess:
-        for pokemon in movess:
+    if name:
+        for pokemon in name:
             print(pokemon["name"][x])
 learn = next(
     (
     pokemon_move
     for pokemon_move in moves
     if pokemon_move["type"]
-    == matching_name["type"]
+    in matching_name["type"]
     ),
     None
 )
-print(learn)
-        
+if learn is None:
+    print(f"No moves for {matching_name["name"][x]}")
+else:
+    move = [
+        pokemon
+        for pokemon in matching_name
+        if learn["type"] in matching_name["type"]
+    ]
+    if move:
+        for pokemon_move in moves:
+            print(pokemon_move["ename"])
